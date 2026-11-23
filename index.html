@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#6579b3" />
+  <title>给酉雪云的生日小旅程</title>
+  <link rel="stylesheet" href="styles.css?v=20261123-hintfix" />
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <div class="sky-decor" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="cloud cloud--one"></span><span class="cloud cloud--two"></span></div>
+    <div class="butterfly-swarm" aria-hidden="true">
+      <img class="swarm-butterfly swarm-butterfly--one" src="assets/butterfly-user.png" alt="" />
+      <img class="swarm-butterfly swarm-butterfly--two" src="assets/butterfly-user.png" alt="" />
+      <img class="swarm-butterfly swarm-butterfly--three" src="assets/butterfly-user.png" alt="" />
+      <img class="swarm-butterfly swarm-butterfly--four" src="assets/butterfly-user.png" alt="" />
+      <img class="swarm-butterfly swarm-butterfly--five" src="assets/butterfly-user.png" alt="" />
+    </div>
+    <div class="transition-flash" aria-hidden="true"></div>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <div class="top-bar" aria-hidden="true">
+      <div class="top-bar__brand"><span class="brand-dot"></span>酉雪云 · 生日礼物</div>
+      <div class="top-bar__progress" id="top-progress">序章</div>
+    </div>
+
+    <section class="scene scene--active scene--cover" id="scene-cover" data-scene="cover">
+      <div class="scene__inner cover-layout">
+        <div class="cover-copy">
+          <p class="eyebrow">给酉雪云的一份小礼物</p>
+          <p class="birthday-stamp">酉雪云 <span>·</span> 21岁 <span>·</span> 10月16日 <span>·</span> 天秤座</p>
+          <h1>今天的主角，<br /><em>生日快乐</em></h1>
+          <p class="lead">一只小蝴蝶，带你收集一整晚的好运。<br />准备好了吗？</p>
+          <p class="cover-note">机械蝴蝶生日任务 · 序章</p>
+          <button class="primary-button" id="start-button" type="button"><span>打开这份礼物</span><span class="button-arrow">↗</span></button>
+        </div>
+        <div class="cover-art" aria-hidden="true">
+          <div class="cover-halo"></div><div class="cover-ring cover-ring--one"></div><div class="cover-ring cover-ring--two"></div>
+          <div class="cover-stars"><i></i><i></i><i></i><i></i><i></i></div>
+          <img class="main-butterfly main-butterfly--hero" src="assets/butterfly-user.png" alt="一只淡蓝色的蝴蝶" />
+          <div class="cover-date">10.16<br /><span>生日星光</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--wish" id="scene-wish" data-scene="wish">
+      <div class="scene__inner wish-layout">
+        <div class="wish-copy">
+          <p class="eyebrow">第一站 · 许愿</p>
+          <h2>公主，请许愿。</h2>
+          <p class="section-lead">请轻轻闭上眼睛，想一件希望成真的事。<br />蜡烛熄灭之前，流星会替你记住它。</p>
+          <figure class="wish-photo">
+            <img src="assets/youxueyun-wish.jpg" alt="酉雪云在生日蛋糕前许愿" />
+            <figcaption>愿每一个愿望，都有星光回应。</figcaption>
+          </figure>
+        </div>
+        <div class="wish-stage">
+          <div class="meteor-field" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="cake-stage" id="cake-stage">
+            <div class="cake-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>·</span><span>✦</span><span>·</span></div>
+            <div class="cake-plate"></div>
+            <div class="cake">
+              <div class="cake-top"><span class="berry berry--one"></span><span class="berry berry--two"></span><span class="berry berry--three"></span><span class="cream-swirl cream-swirl--one"></span><span class="cream-swirl cream-swirl--two"></span></div>
+              <div class="cake-layer cake-layer--top"></div><div class="cake-layer cake-layer--middle"></div><div class="cake-layer cake-layer--bottom"></div>
+              <div class="cake-drip cake-drip--one"></div><div class="cake-drip cake-drip--two"></div>
+            </div>
+            <div class="candle-wrap"><div class="candle candle--one"><span class="flame"></span></div><div class="candle candle--two"><span class="flame"></span></div><div class="candle candle--three"><span class="flame"></span></div></div>
+          </div>
+          <button class="ghost-button" id="blow-button" type="button">吹灭蜡烛 <span>✦</span></button>
+          <p class="hint-text">点击蜡烛，让愿望搭上流星。</p>
+          <div class="wish-card" id="wish-card" aria-live="polite">
+            <span class="wish-card__star">✦</span>
+            <p class="wish-card__title">愿望已被星光收下。</p>
+            <p class="wish-card__text">愿你许下的愿望，都在未来某个刚刚好的时刻，被温柔地实现。</p>
+            <button class="text-button" id="wish-next" type="button">继续往前走 <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--food" id="scene-food" data-scene="food">
+      <div class="scene__inner food-layout">
+        <div class="section-copy">
+          <p class="eyebrow">第二站 · 吃点好的</p>
+          <h2>今天的快乐，<br /><em>先从好吃的开始。</em></h2>
+          <p class="section-lead">生日不需要很多复杂的仪式，<br />有喜欢的食物，就已经很值得庆祝。</p>
+        </div>
+        <div class="food-board">
+          <div class="food-board__label"><span>酉雪云的吃货档案</span><span>今日发现 03</span></div>
+          <div class="food-cards">
+            <button class="food-card food-card--cake" type="button"><img class="food-card__photo" src="assets/food-dessert.webp" alt="一盘甜点和水果" /><span class="food-card__index">01</span><span class="food-card__name">甜点时间</span><span class="food-card__caption">吃到喜欢的甜品，今天就多一份开心。</span></button>
+            <button class="food-card food-card--drink" type="button"><img class="food-card__photo" src="assets/food-drink.webp" alt="一杯夏日冰饮" /><span class="food-card__index">02</span><span class="food-card__name">夏日冰饮</span><span class="food-card__caption">夏天的快乐，当然要有一口冰冰甜甜。</span></button>
+            <button class="food-card food-card--hot" type="button"><img class="food-card__photo" src="assets/food-hotpot.webp" alt="热气腾腾的火锅和菜品" /><span class="food-card__index">03</span><span class="food-card__name">火锅开席</span><span class="food-card__caption">热气腾腾的这一餐，记得好好享受。</span></button>
+          </div>
+          <p class="food-board__note">✦ 点击卡片，领取今天的吃货提示</p>
+        </div>
+        <div class="section-bottom-row"><p class="small-note">今天的热量，暂时不计入生活总账。</p><button class="primary-button primary-button--compact" id="food-next" type="button"><span>查看生日清单</span><span class="button-arrow">↗</span></button></div>
+      </div>
+    </section>
+
+    <section class="scene scene--tasks" id="scene-tasks" data-scene="tasks">
+      <div class="scene__inner tasks-layout">
+        <div class="section-copy section-copy--center"><p class="eyebrow">第三站 · 生日当天任务</p><h2>今天只完成几件小事。</h2><p class="section-lead">不着急成为谁，也不需要处理所有烦恼。<br />先好好过完属于你的这一天。</p></div>
+        <div class="task-panel">
+          <div class="task-panel__header"><span>给今天的酉雪云</span><strong id="task-count">0 / 5</strong></div>
+          <div class="task-list">
+            <label class="task-item"><input type="checkbox" /><span class="task-box"></span><span>吃一份真正想吃的东西</span></label>
+            <label class="task-item"><input type="checkbox" /><span class="task-box"></span><span>收下今天所有的祝福</span></label>
+            <label class="task-item"><input type="checkbox" /><span class="task-box"></span><span>给自己留一点开心的时间</span></label>
+            <label class="task-item"><input type="checkbox" /><span class="task-box"></span><span>晚上至少跟我打一把游戏</span></label>
+            <label class="task-item"><input type="checkbox" /><span class="task-box"></span><span>记得今天的主角是自己</span></label>
+          </div>
+          <div class="task-progress"><span id="task-progress-bar"></span></div>
+        </div>
+        <div class="task-footer"><p id="task-message">把五件小事全部点亮，继续收集下一份祝福。</p><button class="primary-button primary-button--compact" id="tasks-next" type="button" disabled><span>去拼回翅膀</span><span class="button-arrow">↗</span></button></div>
+      </div>
+    </section>
+
+    <section class="scene scene--puzzle" id="scene-puzzle" data-scene="puzzle">
+      <div class="scene__inner puzzle-layout">
+        <div class="section-copy section-copy--center"><p class="eyebrow">第四站 · 翅膀拼图</p><h2>把蝴蝶拼完整。</h2><p class="section-lead">这是一个真正的滑块拼图。<br />点击空白格旁边的拼图，让它一步一步回到原来的位置。</p></div>
+        <div class="puzzle-stage">
+          <div class="puzzle-wrap"><div class="puzzle-grid" id="puzzle-grid" aria-label="淡蓝色蝴蝶滑块拼图"></div><div class="puzzle-meta"><span>九宫格</span><button class="inline-button" id="puzzle-hint" type="button">看一眼编号</button></div></div>
+          <div class="puzzle-helper"><button class="butterfly-helper" id="think-button" type="button"><img src="assets/butterfly-user.png" alt="" /><span>笨笨哒 🦋</span></button><p>卡住了吗？点我一下。</p></div>
+        </div>
+        <div class="think-popover" id="think-popover" aria-hidden="true"><p>要不要再思考一下？</p><div><button class="inline-button" id="think-again" type="button">要，我再试试</button><button class="inline-button inline-button--soft" id="skip-puzzle" type="button">不要，直接通关</button></div></div>
+        <div class="puzzle-success" id="puzzle-success"><span>✦ 拼好了！</span><p id="puzzle-success-text">愿你也像这只蝴蝶一样，带着自己的愿望，展翅飞翔。</p><button class="primary-button primary-button--compact" id="puzzle-next" type="button" disabled><span>前往下一站</span><span class="button-arrow">↗</span></button></div>
+      </div>
+    </section>
+
+    <section class="scene scene--balloons" id="scene-balloons" data-scene="balloons">
+      <div class="scene__inner balloons-layout">
+        <div class="balloons-heading"><p class="eyebrow">第五站 · 收集祝福</p><h2>把今天的好话，都收起来。</h2><p>每个气球里都有一句祝福。<br />慢慢点开，看看今天的好运气。</p></div>
+        <div class="balloon-field" id="balloon-field" aria-label="生日祝福气球"></div>
+        <div class="balloon-toast" id="balloon-toast" aria-live="polite"><span>✦</span><p>点一个气球看看。</p></div>
+        <div class="balloon-bottom"><span id="balloon-count">0 / 10 已收集</span><button class="primary-button primary-button--compact" id="balloons-next" type="button" disabled><span>查看最后的祝福</span><span class="button-arrow">↗</span></button></div>
+      </div>
+    </section>
+
+    <section class="scene scene--final" id="scene-final" data-scene="final">
+      <div class="scene__inner final-layout">
+        <div class="final-art"><div class="final-rays"></div><div class="final-orbit"></div><img class="main-butterfly main-butterfly--final" src="assets/butterfly-user.png" alt="展开翅膀的淡蓝色蝴蝶" /><div class="final-spark final-spark--one">✦</div><div class="final-spark final-spark--two">✧</div><div class="final-spark final-spark--three">·</div></div>
+        <div class="final-copy"><p class="eyebrow">祝福已送达</p><h2 class="final-title">生日快乐，<em>酉雪云</em></h2><p class="final-message">愿你新的一岁，吃到更多真正想吃的东西，遇到更多值得开心的人和事；愿你按自己的节奏生活，也一直保留你身上那些有趣的部分。</p><p class="final-last-line">愿你像这只蝴蝶一样，带着自己的愿望，轻盈地展翅飞翔。</p><div class="final-actions"><button class="primary-button" id="gift-transition-button" type="button"><span>拆开礼物</span><span class="button-arrow">↗</span></button></div><p class="signature">— 一份认真做出来的生日祝福</p></div>
+      </div>
+    </section>
+
+    <section class="scene scene--gift" id="scene-gift" data-scene="gift">
+      <div class="scene__inner gift-layout">
+        <div class="gift-art" aria-hidden="true">
+          <div class="gift-moon"></div><div class="gift-orbit"></div>
+          <div class="gift-fireflies"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <img class="gift-butterfly" src="assets/butterfly-user.png" alt="" />
+          <div class="gift-box" id="gift-box">
+            <div class="gift-box__lid"><span class="gift-box__bow"></span></div>
+            <div class="gift-box__body"><span class="gift-box__ribbon"></span><span class="gift-box__seal">✦</span></div>
+          </div>
+          <span class="gift-ground"></span>
+        </div>
+        <div class="gift-copy">
+          <p class="eyebrow">最后一份小惊喜</p>
+          <h2>拆开这份<br /><em>仲夏夜的礼物。</em></h2>
+          <p class="section-lead">这份礼物，想送给喜欢在峡谷里留下精彩瞬间的你。<br />准备好打开了吗？</p>
+          <button class="primary-button" id="gift-open-button" type="button"><span>拆开看看</span><span class="button-arrow">✦</span></button>
+          <div class="gift-reveal" id="gift-reveal" aria-live="polite" aria-hidden="true">
+            <p class="gift-reveal__eyebrow">我想送你的游戏小礼物是</p>
+            <h3>貂蝉 · 仲夏夜之梦</h3>
+            <p>希望这个仲夏夜的梦，能给你一点小小的惊喜。愿你在峡谷里玩得开心，也愿新的一岁有很多闪闪发亮的时刻。</p>
+            <button class="text-button" id="gift-back-button" type="button">再读一遍生日祝福 <span>→</span></button>
+          </div>
+          <p class="gift-signature">愿每一个好梦，都有蝴蝶替你收藏。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js?v=20261123-hintfix" defer></script>
+</body>
+</html>
